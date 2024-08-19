@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:42:47 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/16 11:41:05 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/08/19 17:17:07 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	check_input(int argc, char *argv[])
 
 	i = 0;
 	if (argc > 6)
-		return_error("Too many arguments.\n");
+		return_error(ERROR_MANY);
 	if (argc < 5)
-		return_error("Too few arguments.\n");
+		return_error(ERROR_FEW);
 	while (argv[i++])
 	{
 		if (ft_atoi_long(argv[i]) < 0)
-			return_error("Invalid arguments.\n");
+			return_error(ERROR_INV_ARG);
 	}
 	return (0);
 }
