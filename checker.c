@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:42:47 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/19 17:17:07 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/08/20 19:36:16 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,21 @@ long int	ft_atoi_long(const char *str)
 		sign = -1;
 		str++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (*str)
+	{
+	if (*str < '0' || *str > '9')		
 		result = (result * 10) + ((*str++) - '0');
+	else
+		return (INT_MIN);
+	}
 	return (sign * result);
 }
 
 int	return_error(char *str)
 {
 	printf("%s\n", str);
-	return (1);
+	// return (1);
+	exit(EXIT_FAILURE);
 }
 
 int	check_input(int argc, char *argv[])
@@ -47,9 +53,21 @@ int	check_input(int argc, char *argv[])
 	if (argc < 5)
 		return_error(ERROR_FEW);
 	while (argv[i++])
-	{
+	{		
 		if (ft_atoi_long(argv[i]) < 0)
 			return_error(ERROR_INV_ARG);
 	}
 	return (0);
+}
+void	*safe_malloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (!ptr)
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	return (ptr);
 }

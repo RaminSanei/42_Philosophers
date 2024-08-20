@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/19 19:49:18 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/08/20 18:53:26 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,69 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+#include <errno.h>
+
 
 # define ERROR_MANY "Too many arguments.\n"
 # define ERROR_FEW "Too few arguments.\n"
 # define ERROR_INV_ARG "Invalid arguments.\n"
 # define ERROR_JOIN "Error in joining thread.\n"
 # define ERROR_CREATE "Error in creating thread.\n"
+# define TAKE_FORK "has taken a fork\n"
+# define IS_EATING "is eating\n"
+
+typedef pthread_mutex_t	t_mutex;
+
+typedef enum e_operation
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}						t_operation;
+
+enum					philo_status
+{
+	THINKING,
+	EATING,
+	SLEEPING,
+	DEAD
+};
 
 typedef struct s_philos
 {
-	int				id;
-	pthread_t		thread;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	struct s_data	*data;
-	time_t			last_meal;
-}					t_philos;
+	int					id;
+	pthread_t			thread_id;
+	t_mutex				*left_fork;
+	t_mutex				*right_fork;
+	struct s_data		*data;
+	time_t				last_meal;
+	enum philo_status	status;
+	int					ate_count;
+}						t_philos;
 
 typedef struct s_data
 {
-	int				num_philos;
-	time_t			time_to_die;
-	time_t			time_to_eat;
-	time_t			time_to_sleep;
-	int				num_must_eat;
-	int				philos_full;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print;
-	time_t			start_time;
-}					t_data;
+	int					num_philos;
+	time_t				time_to_die;
+	time_t				time_to_eat;
+	time_t				time_to_sleep;
+	long				num_must_eat;
+	int					philos_full;
+	t_mutex				*forks;
+	t_mutex				print;
+	time_t				start_time;
+	int					dead_philos;
+}						t_data;
 
-long int			check_input(int argc, char *argv[]);
-void				init_program_data(t_data *data, char *argv[]);
-int					return_error(char *str);
-void				init_philos(t_data *data, t_philos *philos);
+int						check_input(int argc, char *argv[]);
+void					init_program_data(t_data *data, char *argv[]);
+int						return_error(char *str);
+void					init_philos(t_data *data, t_philos *philos);
+void					*philo_check_status(void *philo);
+void					*safe_malloc(size_t size);
 
 #endif
