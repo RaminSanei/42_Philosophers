@@ -6,16 +6,16 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:42:47 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/22 12:57:13 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/08/27 16:56:00 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long int	ft_atoi_long(const char *str)
+long	ft_atoi_long(const char *str)
 {
 	int			sign;
-	long int	result;
+	long	result;
 
 	sign = 1;
 	result = 0;
@@ -26,17 +26,18 @@ long int	ft_atoi_long(const char *str)
 		sign = -1;
 		str++;
 	}
-	while (*str)
-	{
-		if (*str < '0' || *str > '9')
-			result = (result * 10) + ((*str++) - '0');
-		else
-			return (INT_MIN);
-	}
+	while (*str > 47 && *str < 58)
+		result = (result * 10) + ((*str++) - '0');
 	return (sign * result);
 }
 
-int	check_input(int argc, char *argv[])
+int	return_error(char *str)
+{
+	printf("%s\n", str);
+	return (EXIT_FAILURE);
+}
+
+int	check_input(int argc, char **argv)
 {
 	int	i;
 
@@ -45,7 +46,7 @@ int	check_input(int argc, char *argv[])
 		error_exit(ERROR_MANY);
 	if (argc < 5)
 		error_exit(ERROR_FEW);
-	while (argv[i++])
+	while (argv[++i])
 	{
 		if (ft_atoi_long(argv[i]) < 0)
 			error_exit(ERROR_INV_ARG);
@@ -55,7 +56,7 @@ int	check_input(int argc, char *argv[])
 
 void	*safe_malloc(size_t size)
 {
-	void *ptr;
+	void	*ptr;
 
 	ptr = malloc(size);
 	if (!ptr)

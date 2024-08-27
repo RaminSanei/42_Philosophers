@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 11:10:15 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/24 18:01:26 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/08/27 16:38:52 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,21 @@ void	init_program_data(t_data *data, char *argv[])
 
 	i = 0;
 	data->num_philos = ft_atoi_long(argv[1]);
+	printf("num_philos: %d\n", data->num_philos);
 	data->time_to_die = ft_atoi_long(argv[2]);
 	data->time_to_eat = ft_atoi_long(argv[3]);
 	data->time_to_sleep = ft_atoi_long(argv[4]);
 	data->dead_philos = 0;
 	forks = safe_malloc(sizeof(t_mutex) * data->num_philos);
+	data->forks = forks;
 	data->num_must_eat = -1;
 	if (argv[5])
 		data->num_must_eat = ft_atoi_long(argv[5]);
-	data->philos_full = 0;
+	// data->philos_full = 0;
 	handle_safe_mutex(&data->print, INIT);
-	gettimeofday(&data->start_time, NULL);
+	// gettimeofday(&(data->start_time), NULL);
 	while (i++ < data->num_philos)
 		handle_safe_mutex(&data->forks[i], INIT);
-	data->forks = forks;
 }
 
 void	sub_init_philos(t_data *data, t_philos *philos, int i)
@@ -64,8 +65,8 @@ void	init_philos(t_data *data, t_philos *philos)
 	i = 0;
 	while (i < data->num_philos)
 	{
-		philos[i].id = i + 1;
 		philos[i].data = data;
+		philos[i].id = i + 1;
 		philos[i].last_meal = data->start_time;
 		philos[i].alive = true;
 		philos[i].ate_count = 0;
