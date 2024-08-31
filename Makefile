@@ -6,7 +6,7 @@
 #    By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#              #
-#    Updated: 2024/08/27 19:33:30 by ssanei           ###   ########.fr        #
+#    Updated: 2024/08/28 15:35:23 by ssanei           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@ NAME = philo
 
 CFLAGS = -Wall -Werror -Wextra -g -pthread
 
-SRS = 	main.c \
+SRCS = 	main.c \
 		checker.c \
 		init_all_data.c \
 		philos_actions.c \
 		handle_safe_functions.c \
 		utils.c
 
-OBJ = $(SRS:.c=.o)
+OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 

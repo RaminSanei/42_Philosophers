@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   handle_safe_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:21:52 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/27 15:58:33 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/08/29 09:47:07 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	handle_safe_thread(pthread_t *thread, void *(*foo)(void *), void *data,
 		handle_thread_error(pthread_create(thread, NULL, foo, data), opcode);
 	else if (opcode == JOIN)
 		handle_thread_error(pthread_join(*thread, NULL), opcode);
-	// else if (opcode == DETACH)
-	// 	handle_thread_error(pthread_detach(*thread), opcode);
 	else
 		error_exit("Wrong opcode thread handle: use CREATE, JOIN or DETACH");
 }

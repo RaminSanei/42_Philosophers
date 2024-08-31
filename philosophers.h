@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/27 16:52:47 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/08/29 11:54:36 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define DIED "died\n"
 # define IS_SLEEPING "is sleeping\n"
 # define IS_THINKING "is thinking\n"
+# define ERROR_MALLOC "Error: malloc failed\n"
 
 typedef pthread_mutex_t	t_mutex;
 
@@ -73,7 +74,7 @@ typedef struct s_data
 }						t_data;
 
 int						check_input(int argc, char *argv[]);
-long				ft_atoi_long(const char *str);
+long					ft_atoi_long(const char *str);
 void					init_program_data(t_data *data, char *argv[]);
 void					init_philos(t_data *data, t_philos *philos);
 void					*philo_check_status(void *philo);
@@ -86,6 +87,6 @@ void					handle_safe_thread(pthread_t *thread,
 time_t					get_precise_time(void);
 void					free_allocated_memory(t_data *data, t_philos *philos);
 long					get_precise_time(void);
-void					precise_sleep(int time);
+void					precise_sleep(time_t time);
 
 #endif
