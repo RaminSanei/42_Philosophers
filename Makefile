@@ -6,13 +6,13 @@
 #    By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#              #
-#    Updated: 2024/08/28 15:35:23 by ssanei           ###   ########.fr        #
+#    Updated: 2024/09/02 15:50:18 by ssanei           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CFLAGS = -Wall -Werror -Wextra -g -pthread
+# CFLAGS = -Wall -Werror -Wextra -g -pthread
 
 SRCS = 	main.c \
 		checker.c \

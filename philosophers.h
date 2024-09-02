@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/29 11:54:36 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/02 19:10:03 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_data
 	time_t				time_to_eat;
 	time_t				time_to_sleep;
 	long				num_must_eat;
-	// int					philos_full;
+	int					philos_full;
 	t_mutex				*forks;
 	t_mutex				print;
 	time_t				start_time;

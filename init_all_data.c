@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 11:10:15 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/29 19:17:00 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/02 19:11:30 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,16 @@ void	init_program_data(t_data *data, char *argv[])
 	data->num_philos = ft_atoi_long(argv[1]);
 	forks = safe_malloc(sizeof(t_mutex) * data->num_philos);
 	data->forks = forks;
-	data->time_to_die = ft_atoi_long(argv[2]) ;
-	data->time_to_eat = ft_atoi_long(argv[3]) ;
-	data->time_to_sleep = ft_atoi_long(argv[4]) ;
-	// data->time_to_die = ft_atoi_long(argv[2]) * 1e3;
-	// data->time_to_eat = ft_atoi_long(argv[3]) * 1e3;
-	// data->time_to_sleep = ft_atoi_long(argv[4]) * 1e3;
+	data->time_to_die = ft_atoi_long(argv[2]);
+	data->time_to_eat = ft_atoi_long(argv[3]);
+	data->time_to_sleep = ft_atoi_long(argv[4]);
+	data->philos_full = 0;
 	data->num_must_eat = -1;
 	if (argv[5])
 		data->num_must_eat = ft_atoi_long(argv[5]);
-	// handle_safe_mutex(&data->print, INIT);
 	pthread_mutex_init(&data->print, NULL);
 	data->start_time = get_precise_time();
 	while (i++ < data->num_philos)
-		// handle_safe_mutex(&data->forks[i], INIT);
 		pthread_mutex_init(&data->forks[i], NULL);
 }
 
@@ -54,7 +50,7 @@ void	sub_init_philos(t_data *data, t_philos *philos, int i)
 			philos[i].right_fork = &(data->forks[i + 1]);
 		}
 	}
-	else
+	else if (data->num_philos == 1)
 	{
 		philos[i].left_fork = &(data->forks[0]);
 		philos[i].right_fork = NULL;
@@ -75,8 +71,14 @@ void	init_philos(t_data *data, t_philos *philos)
 		philos[i].ate_count = 0;
 		philos[i].left_fork = &data->forks[i];
 		sub_init_philos(data, philos, i);
-		handle_safe_thread(&(philos[i].thread_id), &philo_check_status,
-			&philos[i], CREATE);
+		// handle_safe_thread(&(philos[i].thread_id), &philo_check_status,
+		// 	&philos[i], CREATE);
+		i++;
+	}
+	i = 0;
+	while (i < data->num_philos)
+	{
+		handle_safe_thread(&(philos[i].thread_id), NULL, NULL, JOIN);
 		i++;
 	}
 }

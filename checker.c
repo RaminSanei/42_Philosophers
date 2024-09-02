@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:42:47 by ssanei            #+#    #+#             */
-/*   Updated: 2024/08/29 17:00:19 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/02 14:32:10 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ long	ft_atoi_long(const char *str)
 	return (sign * result);
 }
 
-int	return_error(char *str)
-{
-	printf("%s\n", str);
-	return (EXIT_FAILURE);
-}
+// int	return_error(char *str)
+// {
+// 	printf("%s\n", str);
+// 	return (EXIT_FAILURE);
+// }
 
 int	check_input(int argc, char *argv[])
 {
