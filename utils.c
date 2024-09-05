@@ -6,17 +6,11 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:51:05 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/02 14:37:49 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/04 21:44:13 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	error_exit(char *str)
-{
-	printf("%s\n", str);
-	exit(EXIT_FAILURE);
-}
 
 time_t	get_precise_time(void)
 {
@@ -35,16 +29,28 @@ void	precise_sleep(time_t time)
 		usleep(time);
 }
 
-void	free_allocated_memory(t_data *data, t_philos *philos)
+void	destroy_mutex_function(t_d *data)
 {
 	int	i;
 
+	pthread_mutex_destroy(&data->print);
 	i = 0;
 	while (i < data->num_philos)
 	{
-		pthread_mutex_destroy(philos[i].left_fork);
-		pthread_mutex_destroy(philos[i].right_fork);
+		pthread_mutex_destroy(&data->forks[i].fork);
 		i++;
 	}
-	pthread_mutex_destroy(&data->print);
+}
+
+void	*safe_malloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (ptr == NULL)
+	{
+		printf(ERROR_MALLOC);
+		exit(EXIT_FAILURE);
+	}
+	return (ptr);
 }

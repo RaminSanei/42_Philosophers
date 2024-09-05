@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:42:47 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/02 14:32:10 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/04 21:02:35 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,27 @@ long	ft_atoi_long(const char *str)
 	return (sign * result);
 }
 
-// int	return_error(char *str)
-// {
-// 	printf("%s\n", str);
-// 	return (EXIT_FAILURE);
-// }
-
-int	check_input(int argc, char *argv[])
+int	error_exit(char *message)
 {
-	int	i;
-
-	i = 0;
-	if (argc > 6)
-		error_exit(ERROR_MANY);
-	if (argc < 5)
-		error_exit(ERROR_FEW);
-	while (argv[++i])
-	{
-		if (ft_atoi_long(argv[i]) < 0)
-			error_exit(ERROR_INV_ARG);
-	}
-	return (0);
+	printf("%s", message);
+	return (EXIT_FAILURE);
 }
 
-void	*safe_malloc(size_t size)
+int	check_input(int argc, char **argv)
 {
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
+	if (ft_atoi_long(argv[1]) < 1)
+		return (error_exit(NO_PHILO));
+	if (argc > 6)
+		return (error_exit(ERROR_MANY));
+	if (argc < 5)
+		return (error_exit(ERROR_FEW));
+	if (ft_atoi_long(argv[2]) < 0 || ft_atoi_long(argv[3]) < 0
+		|| ft_atoi_long(argv[4]) < 0)
+		return (error_exit(ERROR_NEG));
+	if (argv[5])
 	{
-		printf(ERROR_MALLOC);
-		exit(EXIT_FAILURE);
+		if (ft_atoi_long(argv[5]) < 0)
+			return (error_exit(ERROR_NEG));
 	}
-	return (ptr);
+	return (EXIT_SUCCESS);
 }

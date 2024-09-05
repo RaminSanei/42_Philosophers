@@ -6,19 +6,18 @@
 #    By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#              #
-#    Updated: 2024/09/02 15:50:18 by ssanei           ###   ########.fr        #
+#    Updated: 2024/09/04 21:22:44 by ssanei           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-# CFLAGS = -Wall -Werror -Wextra -g -pthread
+CFLAGS = -Wall -Werror -Wextra -g -pthread
 
-SRCS = 	main.c \
+SRCS = 	philo.c \
 		checker.c \
 		init_all_data.c \
 		philos_actions.c \
-		handle_safe_functions.c \
 		utils.c
 
 OBJ = $(SRCS:.c=.o)
