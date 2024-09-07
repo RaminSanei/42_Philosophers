@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/04 21:43:19 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 19:19:43 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_data
 	t_mutex				print;
 	time_t				start_time;
 	int					dead_philos;
+	t_mutex				monitoring;
 
 }						t_d;
 
@@ -78,5 +79,6 @@ void					print_status(t_p *philo, int status, char *message);
 t_f						*init_forks(int num);
 t_p						*init_philos(t_d *data);
 void					*safe_malloc(size_t size);
+int						philos_eating(t_p *philo);
 
 #endif

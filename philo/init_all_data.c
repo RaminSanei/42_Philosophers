@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 11:10:15 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/04 21:42:33 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 17:16:05 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_program_data(t_d *data, char *argv[])
 	data->num_must_eat = INT_MAX;
 	if (argv[5])
 		data->num_must_eat = ft_atoi_long(argv[5]);
+	pthread_mutex_init(&data->monitoring, NULL);
 }
 
 t_f	*take_fork(t_d *data, int i, int status)

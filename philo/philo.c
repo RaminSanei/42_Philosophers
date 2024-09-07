@@ -6,13 +6,30 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/07 16:58:15 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 19:02:51 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	table_status_check(t_d *obj, t_p *philo)
+void	check_philosopher_death(t_d *obj, t_p *philo)
+{
+	pthread_mutex_lock(&(obj->monitoring));
+	if ((get_precise_time() - philo->last_meal) > obj->time_to_die)
+	{
+		obj->dead_philos = 1;
+		pthread_mutex_lock(&(obj->print));
+		if (philo->ate_count < obj->num_must_eat)
+		{
+			printf("%-5ld %-5d died\n", (get_precise_time() - obj->start_time),
+				philo->id);
+		}
+		pthread_mutex_unlock(&(obj->print));
+	}
+	pthread_mutex_unlock(&(obj->monitoring));
+}
+
+void	monitor_philosophers(t_d *obj, t_p *philo)
 {
 	int	i;
 
@@ -21,20 +38,12 @@ void	table_status_check(t_d *obj, t_p *philo)
 		i = 0;
 		while (i < obj->num_philos)
 		{
-			pthread_mutex_lock(&(obj->print));
-			if ((get_precise_time() - philo[i].last_meal) > obj->time_to_die)
-			{
-				obj->dead_philos = 1;
-				if (philo[i].ate_count < obj->num_must_eat)
-					printf("%-8ld %-3d died\n", (get_precise_time()
-							- obj->start_time), philo[i].id);
-				pthread_mutex_unlock(&(obj->print));
+			check_philosopher_death(obj, &philo[i]);
+			if (obj->dead_philos)
 				break ;
-			}
-			pthread_mutex_unlock(&(obj->print));
-			precise_sleep(1);
 			i++;
 		}
+		precise_sleep(1);
 	}
 }
 
@@ -50,7 +59,7 @@ static int	sub_main_function(t_d *obj, t_p *philo)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	table_status_check(obj, philo);
+	monitor_philosophers(obj, philo);
 	i = 0;
 	while (i < obj->num_philos)
 	{

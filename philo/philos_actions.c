@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 12:58:52 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/07 16:58:53 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 19:20:26 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,9 @@ void	print_status(t_p *philo, int status, char *message)
 	if (status == 1)
 		philo->last_meal = get_precise_time();
 	if (!philo->data->dead_philos)
-		printf("%-8ld %-3d %s\n", get_precise_time()
-			- philo->data->start_time, philo->id, message);
+		printf("%-5ld %-5d %s", get_precise_time() - philo->data->start_time,
+			philo->id, message);
 	pthread_mutex_unlock(&philo->data->print);
-}
-
-int	philos_eating(t_p *philo)
-{
-	pthread_mutex_lock(&philo->fork_r->fork);
-	print_status(philo, 0, TAKE_FORK);
-	if (philo->fork_l != NULL)
-	{
-		pthread_mutex_lock(&philo->fork_l->fork);
-		print_status(philo, 0, TAKE_FORK);
-		if (philo->data->dead_philos)
-		{
-			pthread_mutex_unlock(&philo->fork_r->fork);
-			pthread_mutex_unlock(&philo->fork_l->fork);
-			return (EXIT_FAILURE);
-		}
-		print_status(philo, 1, EATING);
-		precise_sleep(philo->data->time_to_eat);
-		philo->ate_count++;
-	}
-	pthread_mutex_unlock(&philo->fork_r->fork);
-	if (philo->fork_l != NULL)
-		pthread_mutex_unlock(&philo->fork_l->fork);
-	return (EXIT_SUCCESS);
 }
 
 void	sub_philo_check(t_p *p)

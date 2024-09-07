@@ -6,7 +6,7 @@
 #    By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#              #
-#    Updated: 2024/09/04 21:22:44 by ssanei           ###   ########.fr        #
+#    Updated: 2024/09/07 19:21:44 by ssanei           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS = 	philo.c \
 		checker.c \
 		init_all_data.c \
 		philos_actions.c \
-		utils.c
+		utils.c\
+		philos_eating.c \
 
 OBJ = $(SRCS:.c=.o)
 

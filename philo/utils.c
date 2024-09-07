@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 15:51:05 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/04 21:44:13 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 17:22:15 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	destroy_mutex_function(t_d *data)
 	int	i;
 
 	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->monitoring);
 	i = 0;
 	while (i < data->num_philos)
 	{
