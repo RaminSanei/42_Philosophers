@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:42:47 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/04 21:02:35 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 19:30:00 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	error_exit(char *message)
 	return (EXIT_FAILURE);
 }
 
-int	check_input(int argc, char **argv)
+int	check_input(int argc, char *argv[])
 {
 	if (ft_atoi_long(argv[1]) < 1)
 		return (error_exit(NO_PHILO));
