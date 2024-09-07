@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 12:58:52 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/05 09:15:09 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 16:58:53 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	philos_eating(t_p *philo)
 			return (EXIT_FAILURE);
 		}
 		print_status(philo, 1, EATING);
-		philo->ate_count++;
 		precise_sleep(philo->data->time_to_eat);
+		philo->ate_count++;
 	}
 	pthread_mutex_unlock(&philo->fork_r->fork);
 	if (philo->fork_l != NULL)
