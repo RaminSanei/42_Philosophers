@@ -6,20 +6,20 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 12:58:52 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/07 19:20:26 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 20:55:49 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	check_is_dead(t_p *philo)
+bool	check_is_dead(t_p *philo)
 {
 	if ((get_precise_time() - philo->last_meal) > philo->data->time_to_die)
 	{
 		philo->status = 0;
-		return (EXIT_FAILURE);
+		return (true);
 	}
-	return (EXIT_SUCCESS);
+	return (false);
 }
 
 void	print_status(t_p *philo, int status, char *message)
