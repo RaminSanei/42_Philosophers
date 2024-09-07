@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:42:47 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/07 19:30:00 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 19:39:06 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	check_input(int argc, char *argv[])
 {
 	if (ft_atoi_long(argv[1]) < 1)
 		return (error_exit(NO_PHILO));
+	if (ft_atoi_long(argv[1]) > 200)
+		return (error_exit(ERROR_MANY_PHILO));
 	if (argc > 6)
 		return (error_exit(ERROR_MANY));
 	if (argc < 5)
@@ -53,6 +55,9 @@ int	check_input(int argc, char *argv[])
 	if (ft_atoi_long(argv[2]) < 0 || ft_atoi_long(argv[3]) < 0
 		|| ft_atoi_long(argv[4]) < 0)
 		return (error_exit(ERROR_NEG));
+	if (ft_atoi_long(argv[2]) < 60 || ft_atoi_long(argv[3]) < 60
+		|| ft_atoi_long(argv[4]) < 60)
+		return (error_exit(ERROR_LESS60));
 	if (argv[5])
 	{
 		if (ft_atoi_long(argv[5]) < 0)

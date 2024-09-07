@@ -6,7 +6,7 @@
 /*   By: ssanei <ssanei@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:08:03 by ssanei            #+#    #+#             */
-/*   Updated: 2024/09/07 19:19:43 by ssanei           ###   ########.fr       */
+/*   Updated: 2024/09/07 19:39:50 by ssanei           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define ERROR_MALLOC "Error: malloc failed\n"
 # define NO_PHILO "Error:  no philosopher\n"
 # define ERROR_NEG "Error: negative input is invalid\n"
+# define ERROR_MANY_PHILO "Error: too many philosophers\n"
+# define ERROR_LESS60 "Error: times should be more than 60\n"
 
 typedef pthread_mutex_t	t_mutex;
 
