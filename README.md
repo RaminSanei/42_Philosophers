@@ -20,23 +20,33 @@ This project explores synchronization, concurrency, and resource sharing among m
 
 1. **Clone the repository**:
 
+```bash
 git clone https://github.com/RaminSanei/42_Philosophers.git
+```
 
 2. **Navigate into the project directory**:
 
+```bash
 cd 42_Philosophers
+```
 
 3. **Compile the project**:
 
+```bash
 make
+```
 
 4. **Run the simulation**:
 
+```bash
 ./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_times_each_philosopher_must_eat]
+```
 
 Example:
 
+```bash
 ./philo 5 800 200 200 7
+```
 
 ---
 
@@ -50,4 +60,3 @@ Example:
 ## 📄 License
 
 This project is licensed under the terms of the 42 School's internal license agreement.
-
